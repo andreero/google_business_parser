@@ -1,20 +1,19 @@
+import argparse
+import csv
+import io
+import logging
+import os
 import random
+import sys
+import time
+import warnings
+from logging.handlers import RotatingFileHandler
 
 import chromedriver_autoinstaller
-from selenium import webdriver
-import logging
-from logging.handlers import RotatingFileHandler
+import openpyxl
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
-import sys
-import argparse
-import warnings
-import openpyxl
-import io
-import os
 from selenium.webdriver.common.by import By
-import time
-import csv
 
 LOG_FILE = 'log.log'
 DEFAULT_HEADLESS = False
