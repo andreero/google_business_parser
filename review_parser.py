@@ -17,14 +17,15 @@ from selenium.webdriver.common.by import By
 
 LOG_FILE = 'log.log'
 DEFAULT_HEADLESS = False
-star_score_xpath = '//div[contains(@data-attrid, "star_score")]'
+MAX_QUERIES = 100
 
 
 def create_webdriver(headless=False):
     chromedriver_autoinstaller.install()
     options = webdriver.ChromeOptions()
-    options.add_argument('--ignore-certificate-errors')
     options.add_argument('--ignore-ssl-errors')
+    options.add_argument('--ignore-certificate-errors-spki-list')
+    options.add_argument('log-level=2')
     if headless:
         options.add_argument('--headless')
     return webdriver.Chrome(options=options)
@@ -131,7 +132,7 @@ def main():
     try:
         driver = create_webdriver(headless=DEFAULT_HEADLESS)
         queries = parse_queries_from_xlsx_file(input_file_path=options.input_file)
-        queries = queries[:5]
+        queries = queries[:MAX_QUERIES]
     except Exception as e:
         logger.exception(e)
         sys.exit(1)
